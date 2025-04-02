@@ -20,22 +20,6 @@ namespace WindowsFormsApp2
             InitializeComponent();
         }
 
-        private void chart1_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             double a1 = Convert.ToDouble(this.textBox1.Text);
