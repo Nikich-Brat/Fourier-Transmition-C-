@@ -15,6 +15,23 @@ namespace WindowsFormsApp2
     public partial class Form1 : Form
     {
         const double Pi = 3.14159;
+        int len = 0;
+        double[] signal;
+        struct Arr
+        {
+            float[] signal;
+        };
+        struct TSpectr
+        {
+            Arr realpart;
+            Arr impart;
+            Arr amlitude;
+            Arr freq;
+            Arr phase;
+        };
+
+        
+
         public Form1()
         {
             InitializeComponent();
@@ -28,7 +45,7 @@ namespace WindowsFormsApp2
             double f2 = Convert.ToDouble(this.textBox4.Text);
             double timeinterval = Convert.ToDouble(this.textBox5.Text);
             double freqdisc = Convert.ToDouble(this.textBox6.Text);
-            int len = (int)(timeinterval * freqdisc); // static_cast
+            len = (int)(timeinterval * freqdisc); // static_cast
             double[] signal = new double[len];
             chart1.Series[0].Points.Clear(); 
             for (int i = 0; i <= len - 1; i++)
@@ -38,8 +55,26 @@ namespace WindowsFormsApp2
             }
         }
 
+
         private void chart1_Click_1(object sender, EventArgs e)
         {
+            TSpectr spectr;
+
+
+
+
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            double[] tspectra = new double[len];
+            chart2.Series[0].Points.Clear();
+            SetLength(spectr.ampl, length(signal));
+            SetLength(spectr.realpart, length(signal));
+            SetLength(spectr.impart, length(signal));
+            SetLength(spectr.freq, length(signal));
+            SetLength(spectr.phase, length(signal));
 
         }
     }
