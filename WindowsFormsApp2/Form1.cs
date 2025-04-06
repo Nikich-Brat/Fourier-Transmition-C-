@@ -1,5 +1,4 @@
-﻿#define math
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,6 +10,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using Base;
+using System.CodeDom.Compiler;
+using System.IO;
+using SpectrNS;
+using SignalNS;
 
 
 
@@ -18,19 +21,9 @@ namespace WindowsFormsApp2
 {
     public partial class Form1 : Form
     {
-        struct Spectr
-        {
-            public double[] realpart;
-            public double[] impart;
-            public double[] phase;
-            public double[] amplitude;
-            public double[] freq;
-        };
-
-        const double Pi = 3.14159;
         int len = 0;
-        double[] signal;
-        double freqdisc;
+        Spectr spectr = new Spectr();
+        Signal signal = new Signal();
 
         public Form1()
         {
@@ -40,55 +33,132 @@ namespace WindowsFormsApp2
         private void button1_Click(object sender, EventArgs e)
         {
 
-
             double a1 = Convert.ToDouble(this.textBox1.Text);
             double a2 = Convert.ToDouble(this.textBox2.Text);
             double f1 = Convert.ToDouble(this.textBox3.Text);
             double f2 = Convert.ToDouble(this.textBox4.Text);
-            double timeinterval = Convert.ToDouble(this.textBox5.Text);
-            freqdisc = Convert.ToDouble(this.textBox6.Text);
-            len = (int)(timeinterval * freqdisc); // static_cast
-            signal = new double[len];
-            chart1.Series[0].Points.Clear(); 
+            signal.timeinterval = Convert.ToDouble(this.textBox5.Text);
+            signal.freqdisc = Convert.ToDouble(this.textBox6.Text);
+            len = (int)(signal.timeinterval * signal.freqdisc); // static_cast
+            signal.amplitude = new double[len];
+            signal.time = new double[len];
+            chart1.Series[0].Points.Clear();
             for (int i = 0; i <= len - 1; i++)
             {
-                signal[i] = a1 * Math.Sin(2 * Pi * f1 * i * (1 / freqdisc)) + a2 * Math.Sin(2 * Pi * f2 * i * (1 / freqdisc));
-                this.chart1.Series[0].Points.AddXY((i / (double)len) * timeinterval, signal[i]);
+                signal.amplitude[i] = a1 * Math.Sin(2 * Math.PI * f1 * i * (1 / signal.freqdisc)) + a2 * Math.Sin(2 * Math.PI * f2 * i * (1 / signal.freqdisc));
+                signal.time[i] = (double)((i / (double)len) * signal.timeinterval);
+                this.chart1.Series[0].Points.AddXY(signal.time[i], signal.amplitude[i]);
             }
         }
-            
+
         private void button2_Click(object sender, EventArgs e)
         {
-            double[] tspectra = new double[len];
             chart2.Series[0].Points.Clear();
-            Spectr spectr = new Spectr();
             spectr.amplitude = new double[len];
             spectr.freq = new double[len];
             spectr.impart = new double[len];
             spectr.realpart = new double[len];
             spectr.phase = new double[len];
-            double[,] resultmassive = new double[5,len];
-            resultmassive = (new DFT()).DFTDirect(signal, (int)freqdisc);
-            spectr.amplitude[0] = 0;
-            for (int i = 0; i < len; i++){
-                spectr.amplitude[i] = resultmassive[0,i];
-                spectr.freq[i] = resultmassive[1,i];
-                spectr.realpart[i] = resultmassive[3,i];
-                spectr.impart[i] = resultmassive[4,i];
+            double[,] resultmassive = new double[5, len];
+            signal.freqdisc = Convert.ToDouble(this.textBox6.Text);
+            resultmassive = (new DFT()).DFTDirect(signal.amplitude, (int)signal.freqdisc);
+            for (int i = 0; i < len; i++)
+            {
+                spectr.amplitude[i] = resultmassive[0, i];
+                spectr.freq[i] = resultmassive[1, i];
+                spectr.realpart[i] = resultmassive[3, i];
+                spectr.impart[i] = resultmassive[4, i];
                 chart2.Series[0].Points.AddXY(spectr.freq[i], spectr.amplitude[i]);
             }
 
         }
 
-        private void groupBox2_Enter(object sender, EventArgs e)
+        private async void signalToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string path = @"..\signal.txt";   // путь к файлу 
+            int i = 0;// чтение части файла
+            StreamReader f = new StreamReader(path);
+            signal.amplitude = new double[0];
+            signal.time = new double[0];
+            chart1.Series[0].Points.Clear();
+            signal.timeinterval = Convert.ToDouble(f.ReadLine());
+            signal.freqdisc = Convert.ToDouble(f.ReadLine());
+            this.textBox5.Text = Convert.ToString(signal.timeinterval);
+            this.textBox6.Text = Convert.ToString(signal.freqdisc);
+            while (!f.EndOfStream)
+            {
+                string s = f.ReadLine();
+                int IndexOfChar = s.IndexOf(" ");
+                signal.amplitude = new double[i + 1];
+                signal.time = new double[i + 1];
+                signal.amplitude[i] = Convert.ToDouble(s.Substring(IndexOfChar));
+                signal.time[i] = Convert.ToDouble(s.Substring(0, IndexOfChar));
+                chart1.Series[0].Points.AddXY(signal.time[i], signal.amplitude[i]);
+                i++;
+            }
+            f.Close();
 
         }
 
-        private void chart1_Click(object sender, EventArgs e)
+        private async void spectraToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string path = @"..\spectra.txt";   // путь к файлу 
+            int i = 0;// чтение части файла
+            chart2.Series[0].Points.Clear();
+            StreamReader f = new StreamReader(path);
+            while (!f.EndOfStream)
+            {
+                string s = f.ReadLine();
+                int IndexOfChar = s.IndexOf(" ");
+                spectr.amplitude = new double[i + 1];
+                spectr.freq = new double[i + 1];
+                spectr.impart = new double[i + 1];
+                spectr.realpart = new double[i + 1];
+                spectr.phase = new double[i + 1];
+                spectr.amplitude[i] = Convert.ToDouble(s.Substring(IndexOfChar));
+                spectr.freq[i] = Convert.ToDouble(s.Substring(0, IndexOfChar));
+                chart2.Series[0].Points.AddXY(spectr.freq[i], spectr.amplitude[i]);
+                i++;
+            }
+            f.Close();
+        }
 
+        private async void signalToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            string path = @"..\signal.txt";   // путь к файлу
+            string text = null;
+
+            using (StreamWriter writer = new StreamWriter(path, false))
+            {
+                await writer.WriteLineAsync(Convert.ToString(signal.timeinterval));
+                await writer.WriteLineAsync(Convert.ToString(signal.freqdisc));
+                // преобразуем строку в байты
+                for (int i = 0; i < len; i++)
+                {
+                    text = Convert.ToString(signal.time[i]) + " " + Convert.ToString(signal.amplitude[i]);
+                    await writer.WriteLineAsync(text);
+                }
+                Console.WriteLine("Текст записан в файл");
+            }
+
+        }
+
+        private async void spectraToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            string path = @"..\spectra.txt";   // путь к файлу
+            string text = null;
+
+            using (StreamWriter writer = new StreamWriter(path, false))
+            {
+                // преобразуем строку в байты
+                for (int i = 0; i < len; i++)
+                {
+                    text = Convert.ToString(spectr.freq[i]) + " " + Convert.ToString(spectr.amplitude[i]);
+                    await writer.WriteLineAsync(text);
+                }
+                Console.WriteLine("Текст записан в файл");
+            }
         }
     }
-
+    
 }
