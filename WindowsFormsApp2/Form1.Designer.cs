@@ -338,6 +338,7 @@ namespace WindowsFormsApp2
             this.signalToolStripMenuItem1.Name = "signalToolStripMenuItem1";
             this.signalToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.signalToolStripMenuItem1.Text = "signal";
+            this.signalToolStripMenuItem1.Click += new System.EventHandler(this.signalToolStripMenuItem1_Click);
             // 
             // spectrToolStripMenuItem1
             // 

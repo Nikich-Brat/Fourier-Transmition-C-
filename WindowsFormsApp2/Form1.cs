@@ -73,7 +73,7 @@ namespace WindowsFormsApp2
 
         }
 
-        private async void signalToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void signalToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             string path = @"..\signal.txt";   // путь к файлу 
             int i = 0;// чтение части файла
@@ -98,6 +98,32 @@ namespace WindowsFormsApp2
             }
             f.Close();
 
+        }
+
+        private async void signalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = @"..\signal.txt";   // путь к файлу 
+            int i = 0;// чтение части файла
+            StreamReader f = new StreamReader(path);
+            signal.amplitude = new double[0];
+            signal.time = new double[0];
+            chart1.Series[0].Points.Clear();
+            signal.timeinterval = Convert.ToDouble(f.ReadLine());
+            signal.freqdisc = Convert.ToDouble(f.ReadLine());
+            this.textBox5.Text = Convert.ToString(signal.timeinterval);
+            this.textBox6.Text = Convert.ToString(signal.freqdisc);
+            while (!f.EndOfStream)
+            {
+                string s = f.ReadLine();
+                int IndexOfChar = s.IndexOf(" ");
+                signal.amplitude = new double[i + 1];
+                signal.time = new double[i + 1];
+                signal.amplitude[i] = Convert.ToDouble(s.Substring(IndexOfChar));
+                signal.time[i] = Convert.ToDouble(s.Substring(0, IndexOfChar));
+                chart1.Series[0].Points.AddXY(signal.time[i], signal.amplitude[i]);
+                i++;
+            }
+            f.Close();
         }
 
         private void spectrToolStripMenuItem_Click(object sender, EventArgs e)
