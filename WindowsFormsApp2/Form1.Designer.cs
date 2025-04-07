@@ -30,13 +30,13 @@ namespace WindowsFormsApp2
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -84,24 +84,24 @@ namespace WindowsFormsApp2
             // 
             this.chart1.BackImageAlignment = System.Windows.Forms.DataVisualization.Charting.ChartImageAlignmentStyle.TopRight;
             this.chart1.CausesValidation = false;
-            chartArea5.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea5);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend5.Name = "Legend1";
-            this.chart1.Legends.Add(legend5);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(3, 16);
             this.chart1.Name = "chart1";
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series7.IsXValueIndexed = true;
-            series7.Legend = "Legend1";
-            series7.Name = "Series1";
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series8.Legend = "Legend1";
-            series8.Name = "Series2";
-            this.chart1.Series.Add(series7);
-            this.chart1.Series.Add(series8);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.IsXValueIndexed = true;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "Series2";
+            this.chart1.Series.Add(series1);
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(1008, 365);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -203,19 +203,19 @@ namespace WindowsFormsApp2
             // 
             // chart2
             // 
-            chartArea6.AxisX.Minimum = 0D;
-            chartArea6.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea6);
+            chartArea2.AxisX.Minimum = 0D;
+            chartArea2.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea2);
             this.chart2.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend6.Name = "Legend1";
-            this.chart2.Legends.Add(legend6);
+            legend2.Name = "Legend1";
+            this.chart2.Legends.Add(legend2);
             this.chart2.Location = new System.Drawing.Point(3, 16);
             this.chart2.Name = "chart2";
-            series9.ChartArea = "ChartArea1";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series9.Legend = "Legend1";
-            series9.Name = "Series1";
-            this.chart2.Series.Add(series9);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chart2.Series.Add(series3);
             this.chart2.Size = new System.Drawing.Size(1008, 280);
             this.chart2.TabIndex = 14;
             this.chart2.Text = "chart2";
@@ -322,6 +322,7 @@ namespace WindowsFormsApp2
             this.spectrToolStripMenuItem.Name = "spectrToolStripMenuItem";
             this.spectrToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.spectrToolStripMenuItem.Text = "spectr";
+            this.spectrToolStripMenuItem.Click += new System.EventHandler(this.spectrToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -337,14 +338,13 @@ namespace WindowsFormsApp2
             this.signalToolStripMenuItem1.Name = "signalToolStripMenuItem1";
             this.signalToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.signalToolStripMenuItem1.Text = "signal";
-            this.signalToolStripMenuItem1.Click += new System.EventHandler(this.signalToolStripMenuItem1_Click);
             // 
             // spectrToolStripMenuItem1
             // 
             this.spectrToolStripMenuItem1.Name = "spectrToolStripMenuItem1";
             this.spectrToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.spectrToolStripMenuItem1.Text = "spectr";
-            this.spectrToolStripMenuItem1.Click += new System.EventHandler(this.spectraToolStripMenuItem_Click);
+            this.spectrToolStripMenuItem1.Click += new System.EventHandler(this.spectraToolStripMenuItem1_Click);
             // 
             // exitToolStripMenuItem
             // 
