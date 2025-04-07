@@ -100,7 +100,7 @@ namespace WindowsFormsApp2
 
         }
 
-        private async void spectraToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void spectrToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string path = @"..\spectra.txt";   // путь к файлу 
             int i = 0;// чтение части файла
@@ -143,7 +143,7 @@ namespace WindowsFormsApp2
 
         }
 
-        private async void spectraToolStripMenuItem1_Click(object sender, EventArgs e)
+        private async void spectrToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             string path = @"..\spectra.txt";   // путь к файлу
             string text = null;

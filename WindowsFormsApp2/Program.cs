@@ -16,9 +16,6 @@ namespace WindowsFormsApp2
         [STAThread]
         static void Main()
         {
-            Complex cmp = new Complex();
-            cmp.re = 0;
-            cmp.im = 0;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
