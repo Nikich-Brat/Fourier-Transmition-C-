@@ -70,6 +70,8 @@ namespace WindowsFormsApp2
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -309,20 +311,20 @@ namespace WindowsFormsApp2
             this.signalToolStripMenuItem,
             this.spectrToolStripMenuItem});
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.loadToolStripMenuItem.Text = "load";
             // 
             // signalToolStripMenuItem
             // 
             this.signalToolStripMenuItem.Name = "signalToolStripMenuItem";
-            this.signalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.signalToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.signalToolStripMenuItem.Text = "signal";
             this.signalToolStripMenuItem.Click += new System.EventHandler(this.signalToolStripMenuItem_Click);
             // 
             // spectrToolStripMenuItem
             // 
             this.spectrToolStripMenuItem.Name = "spectrToolStripMenuItem";
-            this.spectrToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.spectrToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.spectrToolStripMenuItem.Text = "spectr";
             this.spectrToolStripMenuItem.Click += new System.EventHandler(this.spectrToolStripMenuItem_Click);
             // 
@@ -332,27 +334,27 @@ namespace WindowsFormsApp2
             this.signalToolStripMenuItem1,
             this.spectrToolStripMenuItem1});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.saveToolStripMenuItem.Text = "save";
             // 
             // signalToolStripMenuItem1
             // 
             this.signalToolStripMenuItem1.Name = "signalToolStripMenuItem1";
-            this.signalToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.signalToolStripMenuItem1.Size = new System.Drawing.Size(106, 22);
             this.signalToolStripMenuItem1.Text = "signal";
             this.signalToolStripMenuItem1.Click += new System.EventHandler(this.signalToolStripMenuItem1_Click);
             // 
             // spectrToolStripMenuItem1
             // 
             this.spectrToolStripMenuItem1.Name = "spectrToolStripMenuItem1";
-            this.spectrToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.spectrToolStripMenuItem1.Size = new System.Drawing.Size(106, 22);
             this.spectrToolStripMenuItem1.Text = "spectr";
             this.spectrToolStripMenuItem1.Click += new System.EventHandler(this.spectrToolStripMenuItem1_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.exitToolStripMenuItem.Text = "exit";
             // 
             // settingsToolStripMenuItem
@@ -412,6 +414,10 @@ namespace WindowsFormsApp2
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -421,6 +427,7 @@ namespace WindowsFormsApp2
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Shown += new System.EventHandler(this.Form1_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -473,6 +480,8 @@ namespace WindowsFormsApp2
         private System.Windows.Forms.ToolStripMenuItem signalToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem spectrToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

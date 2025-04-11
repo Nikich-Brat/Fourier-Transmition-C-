@@ -14,7 +14,9 @@ using System.CodeDom.Compiler;
 using System.IO;
 using SpectrNS;
 using SignalNS;
-
+using FFT;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using static System.Net.WebRequestMethods;
 
 
 namespace WindowsFormsApp2
@@ -54,6 +56,7 @@ namespace WindowsFormsApp2
         private void button2_Click(object sender, EventArgs e)
         {
             chart2.Series[0].Points.Clear();
+            len = (int)(signal.timeinterval * signal.freqdisc); // static_cast
             spectr.amplitude = new double[len];
             spectr.freq = new double[len];
             spectr.impart = new double[len];
@@ -75,8 +78,13 @@ namespace WindowsFormsApp2
 
         private async void signalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string path = @"..\signal.txt";   // путь к файлу 
             int i = 0;// чтение части файла
+            openFileDialog1.AddExtension = true;
+            openFileDialog1.Filter = "(*.dat)|*.dat";
+            if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
+                return;
+            // получаем выбранный файл
+            string path = openFileDialog1.FileName;
             StreamReader f = new StreamReader(path);
             signal.amplitude = new double[0];
             signal.time = new double[0];
@@ -89,8 +97,8 @@ namespace WindowsFormsApp2
             {
                 string s = f.ReadLine();
                 int IndexOfChar = s.IndexOf(" ");
-                signal.amplitude = new double[i + 1];
-                signal.time = new double[i + 1];
+                Array.Resize(ref signal.amplitude, i + 1);
+                Array.Resize(ref signal.time, i + 1);
                 signal.amplitude[i] = Convert.ToDouble(s.Substring(IndexOfChar));
                 signal.time[i] = Convert.ToDouble(s.Substring(0, IndexOfChar));
                 chart1.Series[0].Points.AddXY(signal.time[i], signal.amplitude[i]);
@@ -102,9 +110,14 @@ namespace WindowsFormsApp2
 
         private async void spectrToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string path = @"..\spectra.txt";   // путь к файлу 
             int i = 0;// чтение части файла
             chart2.Series[0].Points.Clear();
+            openFileDialog1.AddExtension = true;
+            openFileDialog1.Filter = "(*.dat)|*.dat";
+            if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
+                return;
+            // получаем выбранный файл
+            string path = openFileDialog1.FileName;
             StreamReader f = new StreamReader(path);
             while (!f.EndOfStream)
             {
@@ -125,8 +138,13 @@ namespace WindowsFormsApp2
 
         private async void signalToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            string path = @"..\signal.txt";   // путь к файлу
             string text = null;
+            saveFileDialog1.AddExtension = true;
+            saveFileDialog1.DefaultExt = "dat";
+            if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
+                return;
+            // получаем выбранный файл
+            string path = saveFileDialog1.FileName;
 
             using (StreamWriter writer = new StreamWriter(path, false))
             {
@@ -145,9 +163,13 @@ namespace WindowsFormsApp2
 
         private async void spectrToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            string path = @"..\spectra.txt";   // путь к файлу
             string text = null;
-
+            saveFileDialog1.AddExtension = true;
+            saveFileDialog1.DefaultExt = "dat";
+            if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
+                return;
+            // получаем выбранный файл
+            string path = saveFileDialog1.FileName;
             using (StreamWriter writer = new StreamWriter(path, false))
             {
                 // преобразуем строку в байты
@@ -158,6 +180,12 @@ namespace WindowsFormsApp2
                 }
                 Console.WriteLine("Текст записан в файл");
             }
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            Spectr spectr = new Spectr();
+            Signal signal = new Signal();
         }
     }
     

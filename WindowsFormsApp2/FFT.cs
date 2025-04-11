@@ -29,6 +29,7 @@ namespace FFT
             if (N == 2)
             {
                 X = new Complex[2];
+
                 X[0] = x[0] + x[1];
                 X[1] = x[0] - x[1];
             }
